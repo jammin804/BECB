@@ -1,4 +1,5 @@
 using System;
+using CustomerInteraction;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,7 @@ namespace PlayerMovement
         private Vector2 _startPosition;
         private Rigidbody2D _rigidbody2D;
         private PlayerInputActions _playerInputActions;
+        private Customer _customer;
 
         private bool _canMove = true;
         private void Awake()
@@ -27,13 +29,13 @@ namespace PlayerMovement
 
         private void OnEnable()
         {
-            _playerInputActions.Enable();
+            _playerInputActions.Player.Enable();
         }
 
         // Update is called once per frame
         private void OnDisable()
         {
-            _playerInputActions.Disable();
+            _playerInputActions.Player.Disable();
         }
 
         private void FixedUpdate()
@@ -42,8 +44,9 @@ namespace PlayerMovement
             {
                 _rigidbody2D.AddForce(_movementInput * moveForce, ForceMode2D.Impulse);    
             }
-            
+
         }
+        
 
         void OnCollisionEnter2D(Collision2D collision)
         {
